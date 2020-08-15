@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
         init(1);
         while (res != CMDR_EXIT) {
             /* 采用控制符来设置控制台输出的字符串的颜色 */
-            fprintf(stdout, "\033[32mxish\033[0m:\033[34m%s\033[0m$ ",
+            fprintf(stdout, "\033[32mxish\033[0m:\033[35m%s\033[0m$ ",
                     strcmp(g_cdpath, getenv("HOME")) == 0 ? "~" : g_cdpath);
             /* 读取控制台输入并解析生成命令链表 */
             fgets(g_line, MAX_LINE, stdin);
@@ -46,7 +46,8 @@ int main(int argc, char **argv) {
             }
         }
     }
-    gbc();
+    
+    restore();
 
     return 0;
 }

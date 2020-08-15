@@ -3,6 +3,5 @@ echo $1 $2 $9 ${11} > a.txt
 shift
 echo $1 $2 $9 ${11} >> a.txt
 time & date & time
-environ | wc -l
-date | testin | testin
+env | wc -l
 test -d .. && dir ..

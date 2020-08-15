@@ -18,6 +18,11 @@
 #define MAX_JOBS 100       /* 最多同时进行的job */
 #define MAX_CMD_LEN 20     /* 指令（不包括参数）长度 */
 
+/* 定义执行函数返回值的含义 */
+#define CMDR_OK 0
+#define CMDR_EXIT 1
+#define CMDR_ERR 2
+
 typedef enum OpType {
     OP_AND,  /* && */
     OP_OR,   /* || */
@@ -69,7 +74,7 @@ void free_list(ShellCmd *head);
 /* 初始化，参数interactive为1表明初始化交互式xish，否则为0 */
 void init(int interactive);
 /* 程序结束后恢复 */
-void gbc();
+void restore();
 /* 根据cmd提供的信息设置io文件描述符，以实现重定向 */
 int set_iofd(ShellCmd *cmd);
 /* 重置io文件描述符 */

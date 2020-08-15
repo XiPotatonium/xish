@@ -111,8 +111,6 @@ void init(int interactive) {
     setenv("shell", g_xish_path, 1);
     /* 设置程序搜索路径 */
     setpath("/bin:/usr/bin");
-    /* 命令background运行时父进程不会调用wait()，因此这里要设置信号防止僵尸进程 */
-    signal(SIGCHLD, SIG_IGN);
     /* 初始化job数组 */
     for (int i = 0; i < MAX_JOBS; ++i) {
         g_joblist[i].state = JOB_NONE;
@@ -126,7 +124,7 @@ void init(int interactive) {
     fflush(stdout);
 }
 
-void gbc() {
+void restore() {
     /* 重设处理函数 */
     signal(SIGINT, SIG_DFL);
     signal(SIGTSTP, SIG_DFL);
@@ -250,6 +248,6 @@ char *parse_para(char *expr) {
 void exception(const char *err) {
     reset_iofd();
     fprintf(stderr, "%s", err);
-    gbc();
+    restore();
     exit(0);
 }

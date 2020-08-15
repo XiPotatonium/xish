@@ -8,11 +8,6 @@
 
 #include "../inc/xish.h"
 
-/* 定义执行函数返回值的含义 */
-#define CMDR_OK 0
-#define CMDR_EXIT 1
-#define CMDR_ERR 2
-
 /**
  * execute: 顺序执行list中的指令
  * 参数 list: 指令链表
